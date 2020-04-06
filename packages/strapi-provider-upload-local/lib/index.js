@@ -11,12 +11,15 @@ const path = require('path');
 module.exports = {
   provider: 'local',
   name: 'Local server',
-  init: (config) => {
+  init: config => {
+    const { path: publicPath } = strapi.config.middleware.settings.public;
+    const uploadDir = path.resolve(strapi.dir, publicPath || strapi.config.paths.static, 'uploads');
+
     return {
-      upload: (file) => {
+      upload: file => {
         return new Promise((resolve, reject) => {
           // write file in public/assets folder
-          fs.writeFile(path.join(strapi.config.public.path, `/uploads/${file.hash}${file.ext}`), file.buffer, (err) => {
+          fs.writeFile(path.join(uploadDir, `${file.hash}${file.ext}`), file.buffer, err => {
             if (err) {
               return reject(err);
             }
@@ -27,16 +30,16 @@ module.exports = {
           });
         });
       },
-      delete: (file) => {
+      delete: file => {
         return new Promise((resolve, reject) => {
-          const filePath = path.join(strapi.config.public.path, `/uploads/${file.hash}${file.ext}`);
+          const filePath = path.join(uploadDir, `${file.hash}${file.ext}`);
 
           if (!fs.existsSync(filePath)) {
-            return resolve('File doesn\'t exist');
+            return resolve("File doesn't exist");
           }
 
           // remove file from public/assets folder
-          fs.unlink(filePath, (err) => {
+          fs.unlink(filePath, err => {
             if (err) {
               return reject(err);
             }
@@ -44,7 +47,7 @@ module.exports = {
             resolve();
           });
         });
-      }
+      },
     };
-  }
+  },
 };

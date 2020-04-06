@@ -99,12 +99,7 @@ module.exports = {
   },
 
   async getEnvironments(ctx) {
-    const environments = Object.keys(strapi.config.environments).map(environment => ({
-      name: environment,
-      active: strapi.config.environment === environment,
-    }));
-
-    ctx.send({ environments });
+    ctx.send({ environments: [] });
   },
 
   async getSettings(ctx) {

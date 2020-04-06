@@ -38,30 +38,6 @@ describe('Upload plugin end to end tests', () => {
     await resetProviderConfigToDefault();
   });
 
-  describe('GET /upload/environments => List available environments', () => {
-    test('Returns the list of envrionments and which one is currently active', async () => {
-      const res = await rq.get('/upload/environments');
-
-      expect(res.statusCode).toBe(200);
-      expect(res.body).toEqual({
-        environments: expect.arrayContaining([
-          {
-            name: 'development',
-            active: true,
-          },
-          {
-            name: 'staging',
-            active: false,
-          },
-          {
-            name: 'production',
-            active: false,
-          },
-        ]),
-      });
-    });
-  });
-
   describe('GET /upload/settings/:environment => Get settings for an environment', () => {
     test('Lists the available providers', async () => {
       const res = await rq.get('/upload/settings/development');
