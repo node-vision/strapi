@@ -16,7 +16,7 @@ Update the `production` settings with the IP or domain name where the project wi
 
 ```js
 {
-  "host": "domain.io", // IP or domain or 0.0.0.0
+  "host": "domain.io",// IP or domain or 0.0.0.0
   "port": 1337
 }
 ```
@@ -684,17 +684,14 @@ http
           .digest('hex');
 
       if (req.headers['x-hub-signature'] == sig) {
-        exec(
-          `cd ${repo} && git pull && ${PM2_CMD}`,
-          (error, stdout, stderr) => {
-            if (error) {
-              console.error(`exec error: ${error}`);
-              return;
-            }
-            console.log(`stdout: ${stdout}`);
-            console.log(`stderr: ${stderr}`);
+        exec(`cd ${repo} && git pull && ${PM2_CMD}`, (error, stdout, stderr) => {
+          if (error) {
+            console.error(`exec error: ${error}`);
+            return;
           }
-        );
+          console.log(`stdout: ${stdout}`);
+          console.log(`stderr: ${stderr}`);
+        });
       }
     });
 
@@ -1180,17 +1177,14 @@ http
           .digest('hex');
 
       if (req.headers['x-hub-signature'] == sig) {
-        exec(
-          `cd ${repo} && git pull && ${PM2_CMD}`,
-          (error, stdout, stderr) => {
-            if (error) {
-              console.error(`exec error: ${error}`);
-              return;
-            }
-            console.log(`stdout: ${stdout}`);
-            console.log(`stderr: ${stderr}`);
+        exec(`cd ${repo} && git pull && ${PM2_CMD}`, (error, stdout, stderr) => {
+          if (error) {
+            console.error(`exec error: ${error}`);
+            return;
           }
-        );
+          console.log(`stdout: ${stdout}`);
+          console.log(`stderr: ${stderr}`);
+        });
       }
     });
 
@@ -1668,7 +1662,7 @@ Login, but don't add content types yet. Close the browser. Quit the running app.
 
 This may be a good point to commit the files in their initial state.
 
-``` bash
+```bash
 cd my-project
 git init
 git add .
@@ -1688,19 +1682,19 @@ Select the region, such as `europe-west`.
 - Language: Node JS
 - Environment: Standard (or Flexible)
 
-(*A note on performance and cost*: the `Standard Environment` is sufficient for development, but it may not be for production. Review the resources your application will need to determine the cost. When you sign up for Google App Engine, it offers a certain amount of free credits which will not be billed.)
+(_A note on performance and cost_: the `Standard Environment` is sufficient for development, but it may not be for production. Review the resources your application will need to determine the cost. When you sign up for Google App Engine, it offers a certain amount of free credits which will not be billed.)
 
 Create the project. Take note of the instance identifier, which is in the form of `<instance_id>:<region>:<instance_name>`.
 
 Check if `gcloud` lists the project:
 
-``` bash
+```bash
 gcloud projects list
 ```
 
 Run `init` to authenticate the cli, and select current cloud project.
 
-``` bash
+```bash
 gcloud init
 ```
 
@@ -1730,7 +1724,7 @@ The following is an example config for `Standard Environment` or `Flexible Envir
 
 ::: tab Standard Environment
 
-``` yaml
+```yaml
 runtime: nodejs10
 
 instance_class: F2
@@ -1751,7 +1745,7 @@ beta_settings:
 
 ::: tab Flexible Environment
 
-``` yaml
+```yaml
 runtime: nodejs10
 
 env: flex
@@ -1791,7 +1785,7 @@ the `.gitignore` entries.
 
 The `PostgreSQL` database will need the `pg` package.
 
-``` bash
+```bash
 yarn add pg
 ```
 
@@ -1803,7 +1797,7 @@ Edit `database.json`, and use the socket path as `host`.
 config/environments/production/database.json
 ```
 
-``` json
+```json
 {
   "defaultConnection": "default",
   "connections": {
@@ -1828,7 +1822,7 @@ Edit `server.json` to pick up the deployed hostname from the `HOST` variable in 
 config/environments/production/server.json
 ```
 
-``` json
+```json
 {
   "host": "${process.env.HOST}",
   "port": "${process.env.PORT || 1337}",
@@ -1851,7 +1845,7 @@ After deployment, the admin UI has to be re-built. This generates the contents o
 
 In `package.json`, add the `gcp-build` command to `scripts`:
 
-``` json
+```json
 {
   "scripts": {
     "gcp-build": "strapi build"
@@ -1861,13 +1855,13 @@ In `package.json`, add the `gcp-build` command to `scripts`:
 
 ### Deploy
 
-``` bash
+```bash
 gcloud app deploy app.yaml --project myapi-123456
 ```
 
 Watch the logs:
 
-``` bash
+```bash
 gcloud app logs tail --project=myapi-123456 -s default
 ```
 
@@ -1881,7 +1875,7 @@ https://myapp-123456.appspot.com/admin/
 
 [Lith/strapi-provider-upload-google-cloud-storage](https://github.com/Lith/strapi-provider-upload-google-cloud-storage)
 
-``` bash
+```bash
 yarn add strapi-provider-upload-google-cloud-storage
 ```
 
@@ -1923,7 +1917,7 @@ config/environments/production/security.json
 config/environments/production/server.json
 ```
 
-``` json
+```json
 {
   "admin": {
     "path": "/dashboard"

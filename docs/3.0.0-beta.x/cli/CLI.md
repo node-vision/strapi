@@ -61,11 +61,6 @@ Start a Strapi application with autoReload disabled.
 This commands is there to run a Strapi application without restarts and file writes (aimed at production usage).
 Certain features are disabled in the `strapi start` mode because they require application restarts.
 
-::: tip
-You can specify a NODE_ENV to use the configurations in the `./config/environments/[development|staging|production]` folder.
-By default the `development` environment will be used.
-:::
-
 ## strapi build
 
 Builds your admin panel.
@@ -80,11 +75,6 @@ options: [--no-optimization]
   Builds the administration panel and minimizing the assets
 - **strapi build --no-optimization**<br/>
   Builds the administration panel without minimizing the assets. The build duration is faster.
-
-::: tip
-You can specify a NODE_ENV to use the configurations in the `./config/environments/[development|staging|production]` folder.
-By default the `development` environment will be used.
-:::
 
 ## strapi generate:api
 
